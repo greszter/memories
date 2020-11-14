@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { TextField, Button, Typography, Paper} from '@material-ui/core';
+import { TextField, Button, Typography, Paper, Container } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-redux';
+import { useHistory } from 'react-router';
 
 import useStyles from './styles';
-import { createUser } from '../../actions/user';
+import { loginUser } from '../../actions/login';
 
-const Register = () => {
+const Login = () => {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const history = useHistory();
+
+  function redirect() {
+      history.push('/posts');
+  }
 
   const dispatch = useDispatch();
   const classes = useStyles();
@@ -24,16 +28,17 @@ const Register = () => {
   const clear = () => {
     setUsername('');
     setPassword('');
-  };
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if(username && password) {
-      dispatch(createUser({ username: username, password: password }))
-    }
-    history.push("/login");
-  };
+      dispatch(loginUser({ username: username, password: password }));
+    redirect();
+    };
+    clear();
+  }
 
   return (
     <Paper className={classes.paper}>
@@ -56,7 +61,7 @@ const Register = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth>
+        <Button className={classes.buttonSubmit} variant="contained" color="primary" size="large" type="submit" fullWidth >
           Login
         </Button>
       </form>
@@ -64,4 +69,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;

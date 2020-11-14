@@ -6,8 +6,8 @@ const router = express.Router();
 
 router.get('/', get);
 router.post('/', create);
-router.patch('/:id', update);
+router.put('/:id', update);
 router.delete('/:id', deletePost);
-router.patch('/:id/like', like);
+router.put('/:id/like', like);
 
 export default router;

@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router';
 
 import useStyles from './styles';
-import { createUser } from '../../actions/user';
+import { createUser } from '../../actions/register';
 
 const Register = () => {
   const [username, setUsername] = useState();

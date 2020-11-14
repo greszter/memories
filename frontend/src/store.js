@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 
 import { register } from './reducers/register';
 import { posts } from './reducers/posts';
+import { login } from './reducers/login';
 
-function root(state = {}, action) {
+function root(state = [], action) {
   return {
     register: register(state.register, action),
     posts: posts(state.posts, action),
+    login: login(state.login, action),
   };
 }
 

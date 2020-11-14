@@ -40,3 +40,46 @@ export const createUser = async (req, res) => {
     return { status: 500 };
   }
 }
+
+export const getUser = async (req, res) => {
+  const username = req.body.username;
+  const password = req.body.password;
+
+  try {
+    const dbUser = await User.findOne({ username: username });
+    const dbPassword = dbUser ? dbUser.password : '';
+    const passwordCheck = await bcrypt.compare(password, dbPassword);
+
+    const errorMessage = {
+      status: 0,
+      message: '',
+    };
+
+    if (!dbUser) {
+        errorMessage.status = 404;
+        errorMessage.message = 'User does not exist.';
+        return errorMessage;
+    } else if (!passwordCheck) {
+      errorMessage.status = 400;
+      errorMessage.message = 'Incorrect password.';
+      return errorMessage;
+    } else if (!username.length && !password.length) {
+      errorMessage.status = 400;
+      errorMessage.message = 'Username and password cannot be empty.';
+      return errorMessage;
+    } else if (!username.length) {
+      errorMessage.status = 400;
+      errorMessage.message = 'Username cannot be empty.';
+      return errorMessage;
+    } else if (!password.length) {
+      errorMessage.status = 400;
+      errorMessage.message = 'Password cannot be empty.';
+      return errorMessage;
+    } else if (dbUser && passwordCheck) {
+      return { status: 200, message: 'Successful login.' };
+    }
+  } catch (error) {
+    console.error(error);
+    return { status: 500 };
+  }
+}
