@@ -1,11 +1,11 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import Register from './Pages/Register/Register';
+import Register from './pages/Register/Register';
 import NavBar from './components/NavBar/NavBar';
-import PostPage from './Pages/PostPage/PostPage';
-import Login from './Pages/Login/Login';
-import MainPage from './Pages/Main/MainPage';
+import PostPage from './pages/PostPage/PostPage';
+import Login from './pages/Login/Login';
+import MainPage from './pages/Main/MainPage';
 
 const App = () => {
 
